@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>SLOT</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <script>
+        	var t_id;
+        	var i = 0;
+			var stop_flg = {
+				'1' : 0,
+				'2' : 0,
+				'3' : 0
+			};
+
+        	function slot () {
+	    		var drum1 = document.querySelector('#drum1');
+	    		var drum2 = document.querySelector('#drum2');
+	    		var drum3 = document.querySelector('#drum3');
+
+    			if (i < 200 || stop_flg[1] < 1) {
+    				drum1.innerHTML = parseInt(Math.random()*10);
+    			};
+
+    			if (i < 400 || stop_flg[2] < 2) {
+    				drum2.innerHTML = parseInt(Math.random()*10);
+    			};
+
+				drum3.innerHTML = parseInt(Math.random()*10);
+    			t_id = setTimeout('slot()',1);
+    			i++;
+
+				if (i >= 600 || stop_flg[3] == 3) {
+					clearTimeout( t_id );
+					i = 0;
+        			stop_flg = 0;
+				};
+			}
+
+        	function stop (num) {
+				stop_flg[num] = num;
+        	}
+        </script>
+    </head>
+    <body>
+    	<div id="drum">
+			<span id="drum1">7</span>
+			<span id="drum2">7</span>
+			<span id="drum3">7</span>
+		</div>
+    	<div id="stop_btn">
+			<input type="button" name="stop1" value="ストップ" id="stop1" onClick='stop(1)' />
+			<input type="button" name="stop2" value="ストップ" id="stop2" onClick='stop(2)' />
+			<input type="button" name="stop3" value="ストップ" id="stop3" onClick='stop(3)' />
+		</div>
+		<input type="button" name="start" value="START" id="start" onClick='slot()' />
+    </body>
+</html>
